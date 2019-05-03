@@ -23,17 +23,61 @@ var companySalesData = [
 ];
 
 function calculateSalesTax(salesData, taxRates) {
-  output = {};
   // Implement your code here
-  for (company of salesData){
-    console.log(company.provice);
+
+  var output = {};
+
+
+  //calculating local sales & tax
+  for (entry of salesData){
+      //sales  var localsales = 0;
+      var totalSales = entry.sales.reduce((total, currentNum) => total + currentNum);
+      var totalTax = totalSales*taxRates[entry.province];
+      console.log(output);
+      if(!output[entry.name]){
+        console.log("flag");
+        output[entry.name] = {
+          totalSales: totalSales,
+          totalTax: totalTax
+        };
+      }
+      else{
+        output[entry.name].totalSales += totalSales;
+        output[entry.name].totalTax += totalTax;
+      }
+
+      //tax
+
   }
+  // putting company name into output object
+    // output[entry.name] = {};
+
+  console.log(output);
+
+  //sorting data for the same company together
+
+  // for (entry in output){
+  //   for (i = 0; i < salesData.length; i++){
+  //     if (salesData[i].name === entry){
+  //       // console.log(entry.name);
+  //       entry.totalSales = totalsales[i];
+  //     }
+  //   }
+  // }
+
+
+
+
+  // console.log(totaltax);
+  // console.log(totalsales);
+  // return(output);
 
 
 }
 
-var results = calculateSalesTax(companySalesData, salesTaxRates);
-results;
+ var results = calculateSalesTax(companySalesData, salesTaxRates);
+  // console.log(results);
+
 /* Expected Results:
 {
   Telus: {
